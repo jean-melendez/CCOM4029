@@ -1,0 +1,24 @@
+#lang racket
+
+;; explota, porque evalua sus argumentos
+;(define (strict-if C T E)
+;  (if (boolean? C)
+;      (if C T E)
+;      (error 'strict-if "quiero un Boolenano")))
+
+;; esto explota
+;;(strict-if #t 2 (/ 1 0))
+
+(define-syntax strict-if
+  (syntax-rules ()
+    [(strict-if C T E)
+     (if (boolean? C)
+         (if C T E)
+         (error 'strict-if "quiero un Booleano"))]))
+
+(define-syntax let1
+  (syntax-rules ()
+    [(let1 (var val) body)
+     (let ([var val]) body)]))
+
+(let1 (x 1) (+ x x))

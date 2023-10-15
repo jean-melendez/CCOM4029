@@ -1,0 +1,27 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-abbr-reader.ss" "lang")((modname todos-ciertos) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;;(first (list #true #false))
+;;#true
+;;> (define unlist (list false true true))
+;;> (first unlist)
+;;#false
+;;> (false? (first unlist))
+;;#true
+
+(check-expect (llena? (list true true)) #true)
+
+(define (llena? lista)
+  (cond
+    [(empty? lista) #false]
+    [else
+     #true]))
+
+(check-expect (todos-ciertos? (list true true)) #true)
+
+(define (todos-ciertos? lista)
+  (cond
+    [(false? (first lista)) #false]
+    [else (todos-ciertos? (rest lista))]))
+               
+    

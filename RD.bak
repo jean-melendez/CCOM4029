@@ -1,0 +1,38 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname RD) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+
+(define-struct layer [color doll])
+
+;; RD (o Russian doll) es uno de:
+  ;; -String
+  ;; -(make-layer String RD)
+
+;; Ejemplos de Russian Dolls
+
+;;(make-layer "green" "red")
+
+;; "humberto"
+
+;; (layer? "pink")
+;; #false
+;; (layer? (make-layer "black" "white"))
+;; #true
+
+(make-layer "pink" (make-layer "black" "white"))
+
+;; RD -> Number
+;; Count how many layers in a Russian Doll
+;;(define (depth an-rd) 3)
+
+(check-expect (depth "pink") 1)
+(check-expect (depth (make-layer "pink" (make-layer "black" "white"))) 3)
+
+(define (depth an-rd)
+  (cond
+    [(layer? an-rd) (add1 (depth (layer-doll an-rd)))]
+    [(string? an-rd) 1]))
+
+
+
+    
